@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import axios from 'axios';
 import { v4 as uuid } from 'uuid';
 import ContactContext from './contactContext';
 import contactReducer from './contactReducer';
@@ -17,29 +18,7 @@ import {
 
 const ContactState = (props) => {
   const initialState = {
-    contacts: [
-      {
-        id: 1,
-        name: 'Jill Johnson',
-        email: 'jill@gmail.com',
-        phone: '111-111-1111',
-        type: 'personal',
-      },
-      {
-        id: 2,
-        name: 'smith Johnson',
-        email: 'smith@gmail.com',
-        phone: '111-131-1111',
-        type: 'personal',
-      },
-      {
-        id: 3,
-        name: 'Hector Johnson',
-        email: 'hector@gmail.com',
-        phone: '111-121-1111',
-        type: 'professional',
-      },
-    ],
+    contacts: [],
     current: null,
     filtered: null,
   };
@@ -47,8 +26,13 @@ const ContactState = (props) => {
   const [state, dispatch] = useReducer(contactReducer, initialState);
 
   //Add contact
-  const addContact = (contact) => {
-    contact.id = uuid();
+  const addContact = async (contact) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
     dispatch({ type: ADD_CONTACT, payload: contact });
   };
 
