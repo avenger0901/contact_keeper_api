@@ -33,7 +33,18 @@ const ContactState = (props) => {
       },
     };
 
-    dispatch({ type: ADD_CONTACT, payload: contact });
+    try {
+      const res = await axios.post('/api/contacts', contact, config);
+      dispatch({
+        type: ADD_CONTACT,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: CONTACT_ERROR,
+        payload: err.response.msg,
+      });
+    }
   };
 
   //Delete contact
