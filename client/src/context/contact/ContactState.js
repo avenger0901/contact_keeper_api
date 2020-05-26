@@ -1,6 +1,5 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
-import { v4 as uuid } from 'uuid';
 import ContactContext from './contactContext';
 import contactReducer from './contactReducer';
 import {
@@ -36,6 +35,7 @@ const ContactState = (props) => {
 
     try {
       const res = await axios.post('/api/contacts', contact, config);
+
       dispatch({
         type: ADD_CONTACT,
         payload: res.data,
