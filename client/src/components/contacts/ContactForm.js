@@ -38,7 +38,7 @@ const ContactForm = () => {
     } else {
       updateContact(contact);
     }
-    clearCurrent();
+    clearAll();
   };
   const clearAll = () => {
     clearCurrent();
